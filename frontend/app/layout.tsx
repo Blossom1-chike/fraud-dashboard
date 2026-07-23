@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import { Lora, Work_Sans } from "next/font/google";
+import { Lora, Work_Sans, Geist } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const lora = Lora({
   variable: "--font-lora",
@@ -27,7 +30,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${lora.variable} ${workSans.variable} h-full antialiased`}
+      className={cn("h-full", "antialiased", lora.variable, workSans.variable, "font-sans", geist.variable)}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import AuthShell from "@/components/AuthShell";
-import { Button } from "../components/Button";
+import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { MoveRight } from "lucide-react";
+import AuthLayout from "@/components/AuthLayout";
 
 const Login = () => {
   const router = useRouter();
@@ -16,7 +17,7 @@ const Login = () => {
   };
 
   return (
-    <AuthShell>
+    <AuthLayout>
       <div className="flex items-center gap-[9px] mb-2">
         <div className="w-7 h-7 rounded-lg bg-teal-soft flex items-center justify-center text-[15px]">
           🛡️
@@ -43,9 +44,7 @@ const Login = () => {
       </div>
 
       <div className="mb-5">
-        <label className="text-ink-muted text-xs block mb-1.5">
-          Password
-        </label>
+        <label className="text-ink-muted text-xs block mb-1.5">Password</label>
 
         <input
           type="password"
@@ -62,17 +61,16 @@ const Login = () => {
         {loading ? "Signing in…" : "Sign in"}
       </Button>
 
-      <div className="text-center text-xs text-ink-muted mb-[18px]">
+      <div className="flex items-center gap-3 text-center text-xs text-ink-muted mb-[18px]">
         Just want to look around?{" "}
         <button
           onClick={() => router.push("/dashboard")}
-          className="bg-transparent border-none cursor-pointer text-teal font-semibold font-sans text-xs p-0"
+          className="flex items-center gap-1 bg-transparent border-none cursor-pointer text-teal font-semibold font-sans text-xs p-0"
         >
-          Try the demo →
+          Try the demo <MoveRight className="w-4 h-4" />
         </button>
       </div>
-
-    </AuthShell>
+    </AuthLayout>
   );
 };
 
