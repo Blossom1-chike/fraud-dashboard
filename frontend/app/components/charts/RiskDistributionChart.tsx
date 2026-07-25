@@ -19,7 +19,7 @@ const data = [
 const RiskDistributionChart = () => {
   return (
     <div>
-      <ResponsiveContainer width="100%" height={160}>
+      <ResponsiveContainer width="100%" height={220}>
         <PieChart>
           <Pie
             data={[
