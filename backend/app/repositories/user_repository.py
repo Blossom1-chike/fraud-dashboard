@@ -10,7 +10,7 @@ class UserRepository:
             self.db.query(User).filter(User.email == email).first()
         )
     
-    def get_user_by_id(self, id: str) -> User | None:
+    def get_user_by_id(self, id: int) -> User | None:
         return (
             self.db.query(User).filter(User.id == id).first()
         )

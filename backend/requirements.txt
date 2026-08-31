@@ -10,7 +10,6 @@ dnspython==2.8.0
 ecdsa==0.19.2
 email-validator==2.3.0
 fastapi==0.139.2
--e git+https://github.com/Blossom1-chike/fraud-dashboard.git@ec44fd209cb1d8f88c0205205ebbcb17084b4b29#egg=fraud_dashboard_backend&subdirectory=backend
 h11==0.16.0
 httptools==0.8.0
 idna==3.18

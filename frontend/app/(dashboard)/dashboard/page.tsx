@@ -1,6 +1,15 @@
 "use client"
+import { useState } from "react";
 import { Bell, Search } from "lucide-react";
 import Card from "@/components/Card";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { initialTransactions, stats } from "../../constants/dashboard";
 import FraudTrendChart from "@/components/charts/FraudTrendChart";
 import PredictionDistribution from "@/components/charts/PredictionDistributionChart";
@@ -10,6 +19,17 @@ import { columns, Transaction } from "./columns";
 import DataTable from "@/components/Table";
 
 const Dashboard = () => {
+  const [query, setQuery] = useState("");
+  const [prediction, setPrediction] = useState("all");
+
+  const filteredTransactions = initialTransactions
+    .filter((t) =>
+      (t.id + t.source + t.prediction + t.status)
+        .toLowerCase()
+        .includes(query.toLowerCase())
+    )
+    .filter((t) => prediction === "all" || t.prediction === prediction);
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -21,10 +41,30 @@ const Dashboard = () => {
           </p>
         </div>
         <div className="relative flex items-center gap-3">
-          <div className="flex items-center gap-2 rounded-xl border px-4 py-2 text-sm text-muted-foreground">
-            <Search className="h-4 w-4" />
-            <span>Search transactions...</span>
+          <div className="relative">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-faint" />
+            <Input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search transactions..."
+              className="w-64 pl-9"
+            />
           </div>
+
+          <Select
+            value={prediction}
+            onValueChange={(value) => setPrediction(value ?? "all")}
+          >
+            <SelectTrigger className="h-9">
+              <SelectValue placeholder="Prediction" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All predictions</SelectItem>
+              <SelectItem value="Fraud">Fraud</SelectItem>
+              <SelectItem value="Needs review">Needs review</SelectItem>
+              <SelectItem value="Legitimate">Legitimate</SelectItem>
+            </SelectContent>
+          </Select>
 
           <button className="flex h-9 w-9 items-center justify-center rounded-xl border">
             <Bell className="h-4 w-4" />
@@ -91,7 +131,7 @@ const Dashboard = () => {
         <Card>
           <DataTable<Transaction>
             columns={columns}
-            data={initialTransactions}
+            data={filteredTransactions}
           />
         </Card>
       </div>

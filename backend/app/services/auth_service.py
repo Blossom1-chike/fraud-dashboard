@@ -33,7 +33,7 @@ class AuthService:
                 detail="Invalid email or password"
             )
         
-        # create the info to be embeded inside the JWT
+        # create the info to be embedded inside the JWT
         token = create_access_token(
             data = {
                 "sub": str(user.id),

@@ -6,6 +6,8 @@ export type Transaction = {
   id: string;
   amount: string;
   source: string;
+  corridor: string;
+  type: string;
   risk: number;
   prediction: string;
   status: string;
@@ -23,7 +25,7 @@ export const columns: Column<Transaction>[] = [
     label: "Transaction",
     render: (row) => (
       <Link
-        href={`/investigation${row.id}`}
+        href={`/investigation/${row.id}`}
         className="border-none bg-transparent p-0 font-medium text-teal"
       >
         {row.id} · {row.amount}

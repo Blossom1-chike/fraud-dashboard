@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta, timezone
 
 import bcrypt
-from jose import jwt
+from jose import jwt, JWTError
 
 from app.core.config import settings
 
@@ -27,3 +27,14 @@ def create_access_token(data: dict, expires_minutes: int | None = None):
         settings.JWT_SECRET_KEY,
         algorithm=settings.JWT_ALGORITHM
     )
+def decode_access_token(token: str) -> dict:
+    try:
+        payload = jwt.decode(
+            token,
+            settings.JWT_SECRET_KEY,
+            algorithms=[settings.JWT_ALGORITHM]
+        )
+
+        return payload
+    except JWTError:
+        raise ValueError("Invalid or expired token")

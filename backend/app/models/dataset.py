@@ -35,7 +35,7 @@ class Dataset(Base):
 
     record: Mapped[int | None] = mapped_column(
         Integer,
-        nullable=False
+        nullable=True
     )
 
     uploaded_at: Mapped[DateTime] = mapped_column(
@@ -43,7 +43,7 @@ class Dataset(Base):
         default=datetime.utcnow
     )
 
-    uploader_by: Mapped[int] = mapped_column(
+    uploaded_by: Mapped[int] = mapped_column(
         ForeignKey("users.id"),
         nullable=False
     )
