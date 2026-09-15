@@ -2,6 +2,7 @@ from typing import TYPE_CHECKING
 from sqlalchemy import (
     String,
     Float,
+    Integer,
     ForeignKey
 )
 
@@ -49,6 +50,21 @@ class Transaction(Base):
         Float,
         nullable=True
     )
+
+    time_step: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False
+    )
+
+    # old_balance_dest: Mapped[float | None] = mapped_column(
+    #     Float,
+    #     nullable=True
+    # )
+
+    # new_balance_dest: Mapped[float | None] = mapped_column(
+    #     Float,
+    #     nullable=True
+    # )
 
     dataset: Mapped["Dataset"] = relationship(
         back_populates="transactions"

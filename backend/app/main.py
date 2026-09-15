@@ -6,8 +6,6 @@ from app.api import auth, datasets
 
 from app.models import User
 
-Base.metadata.create_all(bind=engine)
-
 
 app = FastAPI(
     title= settings.APP_NAME,

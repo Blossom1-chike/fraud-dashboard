@@ -1,1 +1,4 @@
-﻿
+﻿step,type,amount,oldbalanceOrg,newbalanceOrig,nameOrig
+1,PAYMENT,100.5,500,399.5,C123456789
+2,TRANSFER,250,1000,750,C987654321
+3,CASH_OUT,75,300,225,C555555555
